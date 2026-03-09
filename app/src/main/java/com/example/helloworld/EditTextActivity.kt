@@ -11,11 +11,19 @@ import android.widget.Button
 import android.widget.EditText
 import android.net.Uri
 import androidx.core.net.toUri
+import android.widget.Toast
 
 class EditTextActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "EditTextActivityTag"
+    }
+
+    fun validateNumber(text: String, ): String {
+        val filtered_text = text
+            .replace("+7", "8")
+            .filter {it.isDigit()}
+        return filtered_text
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +42,8 @@ class EditTextActivity : AppCompatActivity() {
         open_button.setOnClickListener{
             Log.i(TAG, "send text ${phone.text} to second activity")
 
-            val intent = Intent(this, PhoneActivity::class.java).putExtra("phone", phone.text)
+            val filtered_text = validateNumber(phone.text.toString())
+            val intent = Intent(this, PhoneActivity::class.java).putExtra("phone", filtered_text)
 
             startActivity(intent)
         }
@@ -43,15 +52,23 @@ class EditTextActivity : AppCompatActivity() {
         call_button.setOnClickListener{
             Log.i(TAG, "phone number is ${phone.text}")
 
+            var toShow: Boolean = true
 
-            val intent = Intent(Intent.ACTION_DIAL, ("tel:" + phone.text.toString()).toUri())
+            val filtered_text = validateNumber(phone.text.toString())
+            if(filtered_text.isEmpty()) {
+                Toast.makeText(
+                    this.baseContext,
+                    "Invalid number entered. Please try again",
+                    Toast.LENGTH_SHORT
+                ).show()
+                toShow = false
+            }
 
-            if (intent.resolveActivity(packageManager) !=
-                null) {
+            val intent = Intent(Intent.ACTION_DIAL, ("tel:" + filtered_text).toUri())
+
+            if (intent.resolveActivity(packageManager) != null && toShow) {
                 startActivity(intent)
             }
         }
-
-
     }
 }

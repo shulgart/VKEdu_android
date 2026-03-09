@@ -26,7 +26,7 @@ class PhoneActivity : AppCompatActivity() {
         }
 
         val preview_text = findViewById<TextView>(R.id.phone_preview)
-        preview_text.text = intent.getCharSequenceExtra("phone")
+        preview_text.text = intent.getStringExtra("phone")
         Log.i(TAG, "received text: ${preview_text.text}")
 
     }
