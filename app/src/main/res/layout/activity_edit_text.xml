@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="134dp"
         android:hint="Введите номер телефона здесь"
+        android:textAlignment="center"
         android:inputType="phone"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
@@ -22,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="200dp"
-        android:text="Открыть вторую Activity"
+        android:text="Показать номер телефона"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp" />
 
@@ -30,9 +31,9 @@
         android:id="@+id/call_button"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="300dp"
         android:text="Позвонить другу"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-16dp" />
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
