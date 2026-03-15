@@ -55,10 +55,10 @@ fun AppNavigation() {
 @Composable
 fun DetailsScreen(onBack: () -> Unit) {
     AppDetailsScreen(
-        modifier = Modifier
-            .fillMaxSize()
-            .safeDrawingPadding(),
-        onGoBack = onBack
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .safeDrawingPadding(),
+        onBack = onBack
     )
 }
 
