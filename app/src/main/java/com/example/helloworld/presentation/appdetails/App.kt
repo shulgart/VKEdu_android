@@ -1,4 +1,4 @@
-package com.example.helloworld
+package com.example.helloworld.presentation.appdetails
 
 data class App(
     val name: String,

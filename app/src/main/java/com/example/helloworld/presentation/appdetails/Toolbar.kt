@@ -1,4 +1,4 @@
-package com.example.helloworld
+package com.example.helloworld.presentation.appdetails
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -12,7 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.helloworld.ui.theme.VkEducationTheme
+import com.example.helloworld.presentation.theme.VkEducationTheme
 
 @Composable
 internal fun Toolbar(

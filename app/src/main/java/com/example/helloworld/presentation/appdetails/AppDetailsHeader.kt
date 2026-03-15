@@ -1,4 +1,4 @@
-package com.example.helloworld
+package com.example.helloworld.presentation.appdetails
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -23,7 +23,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.example.helloworld.ui.theme.VkEducationTheme
+import com.example.helloworld.R
+import com.example.helloworld.presentation.appdetails.App
+import com.example.helloworld.presentation.appdetails.Category
+import com.example.helloworld.presentation.theme.VkEducationTheme
 import kotlin.math.roundToInt
 
 @Composable
