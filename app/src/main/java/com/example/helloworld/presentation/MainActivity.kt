@@ -18,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.helloworld.R
 import com.example.helloworld.presentation.appcard.AppCardHeader
+import com.example.helloworld.presentation.appcard.AppCardScreen
 import com.example.helloworld.presentation.appcard.AppCategory
 import com.example.helloworld.presentation.appcard.AppRow
 import com.example.helloworld.presentation.appcard.AppShort
@@ -40,85 +41,15 @@ class MainActivity : ComponentActivity() {
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "home") {
+    NavHost(navController = navController, startDestination = "cards") {
         // Определение первого экрана
-        composable("home") {
-            HomeScreen(onNavigateToDetails = { navController.navigate("details") })
+        composable("cards") {
+            AppCardScreen(onGoForward = { navController.navigate("details") })
         }
         // Определение второго экрана
         composable("details") {
-            DetailsScreen(onBack = { navController.popBackStack() })
+            AppDetailsScreen(onBack = { navController.popBackStack() })
         }
-    }
-}
-
-@Composable
-fun DetailsScreen(onBack: () -> Unit) {
-    AppDetailsScreen(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .safeDrawingPadding(),
-        onBack = onBack
-    )
-}
-
-@Composable
-fun HomeScreen(onNavigateToDetails: () -> Unit = {}) {
-    val browserApp = AppShort(
-        "Яндекс.Браузер - с Алисой",
-        "Быстрый и безопасный браузер",
-        AppCategory.TOOLS,
-        R.drawable.yandex_brow
-    )
-
-    val sberApp = AppShort(
-        "СберБанк Онлайн - с Салютом",
-        "Больше чем банк",
-        AppCategory.FINANCES,
-        R.drawable.sber
-    )
-
-    val mailApp = AppShort(
-        "Почта Mail.ru",
-        "Почтовый клиент для любых ящиков",
-        AppCategory.TOOLS,
-        R.drawable.mail_logo
-    )
-
-    val navApp = AppShort(
-        "Яндекс Навигатор",
-        "Парковки и заправки - по пути",
-        AppCategory.TRANSPORT,
-        R.drawable.navigator
-    )
-
-    val mtsApp = AppShort(
-        "Мой МТС",
-        "Мой МТС - центр экосистемы МТС",
-        AppCategory.TOOLS,
-        R.drawable.mts
-    )
-
-    val yandexApp = AppShort(
-        "Яндекс - с Алисой",
-        "Яндекс - поиск всегда под рукой",
-        AppCategory.TOOLS,
-        R.drawable.yandex
-    )
-
-    Column(
-        modifier = Modifier
-            .background(Color.LightGray)
-            .fillMaxHeight()
-            .safeDrawingPadding()
-    ) {
-        AppCardHeader()
-        AppRow(sberApp, onNavigateToDetails)
-        AppRow(browserApp, onNavigateToDetails)
-        AppRow(mailApp, onNavigateToDetails)
-        AppRow(navApp, onNavigateToDetails)
-        AppRow(mtsApp, onNavigateToDetails)
-        AppRow(yandexApp, onNavigateToDetails)
     }
 }
 
@@ -126,6 +57,6 @@ fun HomeScreen(onNavigateToDetails: () -> Unit = {}) {
 @Composable
 fun ScenePreview() {
     VkEducationTheme {
-        HomeScreen()
+        AppCardScreen({})
     }
 }
