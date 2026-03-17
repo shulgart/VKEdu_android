@@ -1,0 +1,86 @@
+package com.example.helloworld.presentation.appcard
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.helloworld.R
+import com.example.helloworld.presentation.appdetails.AppDetailsState
+import com.example.helloworld.presentation.theme.VkEducationTheme
+
+@Composable
+fun AppCardContent(list: List<AppShort>,
+                   onClickLogo: () -> Unit,
+                   onGoForward: () -> Unit,
+                   modifier: Modifier) {
+    Column(
+        modifier
+    ) {
+        AppCardHeader(onClickLogo)
+        for (app in list) {
+            AppRow(app, onGoForward)
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun Preview()
+{
+    val browserApp = AppShort(
+        "Яндекс.Браузер - с Алисой",
+        "Быстрый и безопасный браузер",
+        AppCategory.TOOLS,
+        R.drawable.yandex_brow
+    )
+
+    val sberApp = AppShort(
+        "СберБанк Онлайн - с Салютом",
+        "Больше чем банк",
+        AppCategory.FINANCES,
+        R.drawable.sber
+    )
+
+    val mailApp = AppShort(
+        "Почта Mail.ru",
+        "Почтовый клиент для любых ящиков",
+        AppCategory.TOOLS,
+        R.drawable.mail_logo
+    )
+
+    val navApp = AppShort(
+        "Яндекс Навигатор",
+        "Парковки и заправки - по пути",
+        AppCategory.TRANSPORT,
+        R.drawable.navigator
+    )
+
+    val mtsApp = AppShort(
+        "Мой МТС",
+        "Мой МТС - центр экосистемы МТС",
+        AppCategory.TOOLS,
+        R.drawable.mts
+    )
+
+    val yandexApp = AppShort(
+        "Яндекс - с Алисой",
+        "Яндекс - поиск всегда под рукой",
+        AppCategory.TOOLS,
+        R.drawable.yandex
+    )
+
+    VkEducationTheme() {
+        AppCardContent(
+            list = listOf(browserApp, sberApp, mailApp, navApp, mtsApp, yandexApp),
+            {},
+            {},
+            modifier=Modifier
+            .background(Color.LightGray)
+            .fillMaxHeight()
+            .safeDrawingPadding())
+    }
+}
