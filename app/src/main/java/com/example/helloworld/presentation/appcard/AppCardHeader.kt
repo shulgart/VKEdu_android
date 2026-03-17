@@ -2,6 +2,7 @@ package com.example.helloworld.presentation.appcard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +20,7 @@ import com.example.helloworld.presentation.theme.VkEducationTheme
 
 @Composable
 fun AppCardHeader(
+    onClick: () -> Unit = {},
     modifier: Modifier = Modifier
         .fillMaxWidth()
         .background(Color.Blue)
@@ -36,6 +38,10 @@ fun AppCardHeader(
             null,
             modifier = Modifier
                 .size(115.dp)
+                .clickable(
+                    enabled = true,
+                    onClick=onClick
+                )
         )
         Image(
             painter = painterResource(R.drawable.view_cozy),
