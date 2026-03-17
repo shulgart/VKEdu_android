@@ -18,6 +18,8 @@
 
     <string name="under_development">В процессе разработки</string>
 
+    <string name="logo_clicked">RuStore @ All rights reserved</string>
+
     <string name="app_details_error">Произошла непредвиденная ошибка</string>
     <string name="app_details_error_refresh">Перезагрузить</string>
 </resources>
