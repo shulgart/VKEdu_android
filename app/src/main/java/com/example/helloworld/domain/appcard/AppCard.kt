@@ -1,6 +1,6 @@
-package com.example.helloworld.presentation.appcard
+package com.example.helloworld.domain.appcard
 
-data class AppShort(
+data class AppCard(
     val name: String,
     val description: String,
     val category: AppCategory,

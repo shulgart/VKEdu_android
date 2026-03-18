@@ -1,4 +1,4 @@
-package com.example.helloworld.presentation.appcard
+package com.example.helloworld.domain.appcard
 
 enum class AppCategory(desc: String){
     FINANCES("Финансы"),
