@@ -1,6 +1,7 @@
 package com.example.helloworld.presentation.appdetails
 
 import androidx.compose.runtime.Immutable
+import com.example.helloworld.domain.appdetails.AppDetails
 
 @Immutable
 sealed interface AppDetailsState {

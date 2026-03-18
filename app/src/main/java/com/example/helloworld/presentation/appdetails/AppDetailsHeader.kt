@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.helloworld.R
+import com.example.helloworld.domain.appdetails.AppDetails
+import com.example.helloworld.domain.appdetails.Category
 import com.example.helloworld.presentation.theme.VkEducationTheme
 import kotlin.math.roundToInt
 
