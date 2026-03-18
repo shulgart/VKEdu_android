@@ -9,11 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.helloworld.R
-import com.example.helloworld.presentation.appdetails.AppDetailsState
+import com.example.helloworld.domain.appcard.AppCategory
+import com.example.helloworld.domain.appcard.AppCard
 import com.example.helloworld.presentation.theme.VkEducationTheme
 
 @Composable
-fun AppCardContent(list: List<AppShort>,
+fun AppCardContent(list: List<AppCard>,
                    onClickLogo: () -> Unit,
                    onGoForward: () -> Unit,
                    modifier: Modifier) {
@@ -31,42 +32,42 @@ fun AppCardContent(list: List<AppShort>,
 @Composable
 private fun Preview()
 {
-    val browserApp = AppShort(
+    val browserApp = AppCard(
         "Яндекс.Браузер - с Алисой",
         "Быстрый и безопасный браузер",
         AppCategory.TOOLS,
         R.drawable.yandex_brow
     )
 
-    val sberApp = AppShort(
+    val sberApp = AppCard(
         "СберБанк Онлайн - с Салютом",
         "Больше чем банк",
         AppCategory.FINANCES,
         R.drawable.sber
     )
 
-    val mailApp = AppShort(
+    val mailApp = AppCard(
         "Почта Mail.ru",
         "Почтовый клиент для любых ящиков",
         AppCategory.TOOLS,
         R.drawable.mail_logo
     )
 
-    val navApp = AppShort(
+    val navApp = AppCard(
         "Яндекс Навигатор",
         "Парковки и заправки - по пути",
         AppCategory.TRANSPORT,
         R.drawable.navigator
     )
 
-    val mtsApp = AppShort(
+    val mtsApp = AppCard(
         "Мой МТС",
         "Мой МТС - центр экосистемы МТС",
         AppCategory.TOOLS,
         R.drawable.mts
     )
 
-    val yandexApp = AppShort(
+    val yandexApp = AppCard(
         "Яндекс - с Алисой",
         "Яндекс - поиск всегда под рукой",
         AppCategory.TOOLS,

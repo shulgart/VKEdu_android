@@ -24,10 +24,13 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import com.example.helloworld.R
+import com.example.helloworld.domain.appcard.AppCategory
+import com.example.helloworld.domain.appcard.AppCard
+import com.example.helloworld.domain.appcard.getAppCategory
 import com.example.helloworld.presentation.theme.VkEducationTheme
 
 @Composable
-fun AppRow(app: AppShort, onGoForward: () -> Unit = {}) {
+fun AppRow(app: AppCard, onGoForward: () -> Unit = {}) {
     Button (
         onClick = onGoForward,
         colors = ButtonDefaults.buttonColors(
@@ -82,7 +85,8 @@ fun AppRow(app: AppShort, onGoForward: () -> Unit = {}) {
 @Preview
 @Composable
 private fun Preview(){
-    val app = AppShort("Яндекс.Браузер - с Алисой",
+    val app = AppCard(
+        "Яндекс.Браузер - с Алисой",
         "Быстрый и безопасный браузер",
         AppCategory.TOOLS,
         R.drawable.yandex_brow
