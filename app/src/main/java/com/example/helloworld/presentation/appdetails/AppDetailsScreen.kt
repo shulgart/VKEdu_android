@@ -20,8 +20,11 @@ import com.example.helloworld.R
 import kotlinx.coroutines.flow.Flow
 
 @Composable
-fun AppDetailsScreen(onBack: () -> Unit) {
-    val viewModel = viewModel<AppDetailsViewModel>()
+fun AppDetailsScreen(
+    viewModel: AppDetailsViewModel,
+    onBack: () -> Unit
+) {
+//    val viewModel = viewModel<AppDetailsViewModel>()
     val state by viewModel.state.collectAsState()
     val events = viewModel.events
 

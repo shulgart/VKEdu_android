@@ -6,13 +6,18 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.helloworld.presentation.appcard.AppCardScreen
+import com.example.helloworld.presentation.appcard.AppCardViewModel
 import com.example.helloworld.presentation.appdetails.AppDetailsScreen
+import com.example.helloworld.presentation.appdetails.AppDetailsViewModel
 import com.example.helloworld.presentation.theme.VkEducationTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,19 +37,21 @@ fun AppNavigation() {
     NavHost(navController = navController, startDestination = "cards") {
         // Определение первого экрана
         composable("cards") {
-            AppCardScreen(onGoForward = { navController.navigate("details") })
+            val viewModel: AppCardViewModel = hiltViewModel()
+            AppCardScreen(viewModel, onGoForward = { navController.navigate("details") })
         }
         // Определение второго экрана
         composable("details") {
-            AppDetailsScreen(onBack = { navController.popBackStack() })
+            val viewModel: AppDetailsViewModel = hiltViewModel()
+            AppDetailsScreen(viewModel, onBack = { navController.popBackStack() })
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ScenePreview() {
-    VkEducationTheme {
-        AppCardScreen({})
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ScenePreview() {
+//    VkEducationTheme {
+//        AppCardScreen()
+//    }
+//}

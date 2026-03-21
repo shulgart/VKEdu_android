@@ -28,8 +28,11 @@ import com.example.helloworld.presentation.appdetails.AppDetailsViewModel
 import kotlinx.coroutines.flow.Flow
 
 @Composable
-fun AppCardScreen(onGoForward: () -> Unit) {
-    val viewModel = viewModel<AppCardViewModel>()
+fun AppCardScreen(
+    viewModel: AppCardViewModel,
+    onGoForward: () -> Unit
+) {
+//    val viewModel = viewModel<AppCardViewModel>()
     val state by viewModel.state.collectAsState()
     val events = viewModel.events
 
