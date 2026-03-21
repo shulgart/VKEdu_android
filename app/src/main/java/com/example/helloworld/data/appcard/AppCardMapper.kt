@@ -2,8 +2,9 @@ package com.example.helloworld.data.appcard
 
 import com.example.helloworld.domain.appcard.AppCard
 import com.example.helloworld.domain.appcard.AppCategory
+import javax.inject.Inject
 
-class AppCardMapper {
+class AppCardMapper @Inject constructor() {
     fun toDomain(dto: AppCardDto): AppCard = AppCard(
         name = dto.name,
         description = dto.description,
