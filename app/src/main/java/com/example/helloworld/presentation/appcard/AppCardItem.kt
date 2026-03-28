@@ -31,9 +31,9 @@ import com.example.helloworld.domain.appcard.AppCard
 import com.example.helloworld.presentation.theme.VkEducationTheme
 
 @Composable
-fun AppRow(app: AppCard, onGoForward: () -> Unit = {}) {
+fun AppRow(app: AppCard, onGoForward: (String) -> Unit = {}) {
     Button (
-        onClick = onGoForward,
+        onClick = {onGoForward(app.id)},
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.White
         ),

@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun AppDetailsScreen(
     viewModel: AppDetailsViewModel,
-    onBack: () -> Unit
+    onBack: () -> Unit,
 ) {
 //    val viewModel = viewModel<AppDetailsViewModel>()
     val state by viewModel.state.collectAsState()

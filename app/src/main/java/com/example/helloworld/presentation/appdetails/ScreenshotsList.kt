@@ -40,7 +40,7 @@ fun ScreenshotsList(
             state = rememberPagerState { screenshotUrlList.size },
         ) { index ->
             AsyncImage(
-                model = screenshotUrlList[index],
+                model = screenshotUrlList?.get(index),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()

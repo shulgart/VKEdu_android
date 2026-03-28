@@ -13,8 +13,8 @@ enum class AppCategory(val value: String) {
     @SerialName("Производительность")
     PRODUCTIVITY("Производительность"),
 
-    @SerialName("Социальные сети")
-    SOCIAL("Социальные сети"),
+    @SerialName("Общение")
+    SOCIAL("Общение"),
 
     @SerialName("Образование")
     EDUCATION("Образование"),
@@ -31,8 +31,8 @@ enum class AppCategory(val value: String) {
     @SerialName("Фотография")
     PHOTOGRAPHY("Фотография"),
 
-    @SerialName("Здоровье")
-    HEALTH("Здоровье"),
+    @SerialName("Здоровье и фитнес")
+    HEALTH("Здоровье и фитнес"),
 
     @SerialName("Спорт")
     SPORTS("Спорт"),
@@ -40,8 +40,8 @@ enum class AppCategory(val value: String) {
     @SerialName("Новости")
     NEWS("Новости"),
 
-    @SerialName("Книги")
-    BOOKS("Книги"),
+    @SerialName("Книги и справочники")
+    BOOKS("Книги и справочники"),
 
     @SerialName("Бизнес")
     BUSINESS("Бизнес"),
@@ -55,14 +55,26 @@ enum class AppCategory(val value: String) {
     @SerialName("Карты")
     MAPS("Карты"),
 
-    @SerialName("Еда")
-    FOOD("Еда"),
+    @SerialName("Еда и напитки")
+    FOOD("Еда и напитки"),
 
-    @SerialName("Покупки")
-    SHOPPING("Покупки"),
+    @SerialName("Шопинг")
+    SHOPPING("Шопинг"),
 
     @SerialName("Утилиты")
-    UTILITIES("Утилиты");
+    UTILITIES("Утилиты"),
+
+    @SerialName("Фото и видео")
+    PHOTOVIDEO("Фото и видео"),
+
+    @SerialName("Образ жизни")
+    LIFESTYLE("Образ жизни"),
+
+    @SerialName("Навигация")
+    NAVIGATION("Навигация"),
+
+    @SerialName("Погода")
+    WEATHER("Погода");
     companion object {
         // Эта функция заменит падающий valueOf
         fun fromString(value: String): AppCategory {

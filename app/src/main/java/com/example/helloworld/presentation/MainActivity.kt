@@ -7,9 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.helloworld.presentation.appcard.AppCardScreen
 import com.example.helloworld.presentation.appcard.AppCardViewModel
 import com.example.helloworld.presentation.appdetails.AppDetailsScreen
@@ -38,10 +40,14 @@ fun AppNavigation() {
         // Определение первого экрана
         composable("cards") {
             val viewModel: AppCardViewModel = hiltViewModel()
-            AppCardScreen(viewModel, onGoForward = { navController.navigate("details") })
+            AppCardScreen(viewModel, onGoForward = { id -> navController.navigate("details/$id") })
         }
         // Определение второго экрана
-        composable("details") {
+        composable(
+            "details/{id}",
+            listOf(navArgument("id") { type = NavType.StringType }
+        )) { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id") ?: ""
             val viewModel: AppDetailsViewModel = hiltViewModel()
             AppDetailsScreen(viewModel, onBack = { navController.popBackStack() })
         }

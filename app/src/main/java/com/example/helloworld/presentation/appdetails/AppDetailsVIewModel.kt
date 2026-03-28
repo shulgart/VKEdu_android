@@ -1,6 +1,7 @@
 package com.example.helloworld.presentation.appdetails
 
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.helloworld.domain.appdetails.GetAppDetailsUseCase
@@ -18,8 +19,9 @@ import javax.inject.Inject
 @HiltViewModel
 class AppDetailsViewModel @Inject constructor(
     private val getAppDetailsUseCase: GetAppDetailsUseCase,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
+    private val id: String = checkNotNull(savedStateHandle["id"])
     private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
     val state = _state.asStateFlow()
 
@@ -50,7 +52,7 @@ class AppDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = AppDetailsState.Loading
 
-            getAppDetailsUseCase("fa2e31b8-1234-4cf7-9914-108a170a1b01").catch { e ->
+            getAppDetailsUseCase(id).catch { e ->
                 _state.value = AppDetailsState.Error
                 Log.d("HOHOHO", "ERROR $e")
             }.collect { appDetails ->

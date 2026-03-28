@@ -30,7 +30,7 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun AppCardScreen(
     viewModel: AppCardViewModel,
-    onGoForward: () -> Unit
+    onGoForward: (String) -> Unit
 ) {
 //    val viewModel = viewModel<AppCardViewModel>()
     val state by viewModel.state.collectAsState()
@@ -71,7 +71,7 @@ fun AppCardScreen(
             is AppCardState.Content -> {
                 AppCardContent(
                     list = currentState.appCards,
-                    onGoForward = onGoForward,
+                    onGoForward = {id -> onGoForward(id)},
                     onClickLogo = { viewModel.clickLogo() },
                     modifier=Modifier
                         .background(Color.LightGray)

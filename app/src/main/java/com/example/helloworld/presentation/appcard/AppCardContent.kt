@@ -18,7 +18,7 @@ import com.example.helloworld.presentation.theme.VkEducationTheme
 @Composable
 fun AppCardContent(list: List<AppCard>,
                    onClickLogo: () -> Unit,
-                   onGoForward: () -> Unit,
+                   onGoForward: (String) -> Unit,
                    modifier: Modifier) {
     Column(
         modifier
