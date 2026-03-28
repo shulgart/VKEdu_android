@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -11,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.helloworld.R
 import com.example.helloworld.domain.appcard.AppCategory
 import com.example.helloworld.domain.appcard.AppCard
+import androidx.compose.foundation.lazy.items
 import com.example.helloworld.presentation.theme.VkEducationTheme
 
 @Composable
@@ -22,9 +24,14 @@ fun AppCardContent(list: List<AppCard>,
         modifier
     ) {
         AppCardHeader(onClickLogo)
-        for (app in list) {
-            AppRow(app, onGoForward)
+        LazyColumn(modifier) {
+            items(list) { app ->
+                AppRow(app, onGoForward)
+            }
         }
+//        for (app in list) {
+//            AppRow(app, onGoForward)
+//        }
     }
 }
 
