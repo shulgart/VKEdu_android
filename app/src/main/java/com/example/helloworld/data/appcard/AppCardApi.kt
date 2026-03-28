@@ -1,14 +1,14 @@
 package com.example.helloworld.data.appcard
 
-import com.example.helloworld.R
 import com.example.helloworld.data.appcard.dto.AppCardDto
-import com.example.helloworld.domain.appcard.AppCategory
-import com.example.helloworld.domain.appcard.AppCard
-import kotlinx.coroutines.delay
+import com.example.helloworld.data.appdetails.AppDetailsDto
 import retrofit2.http.GET
-import kotlin.time.Duration.Companion.seconds
+import retrofit2.http.Path
 
 interface AppCardApi {
     @GET("/catalog")
     suspend fun get(): List<AppCardDto>
+
+    @GET("catalog/{id}")
+    suspend fun getAppDetails(@Path("id") id: String): AppDetailsDto
 }

@@ -1,5 +1,7 @@
 package com.example.helloworld.domain.appdetails
 
+import kotlinx.coroutines.flow.Flow
+
 interface AppDetailsRepository {
-    suspend fun get(): AppDetails
+    suspend fun getAppDetails(id: String): Flow<AppDetails>
 }

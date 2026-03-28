@@ -52,7 +52,6 @@ class AppCardViewModel @Inject constructor(
     }
 
     fun onCardClicked(navigate: (String) -> Unit) {
-        // Do some logic
         navigate("screen_b") // Trigger navigation via the passed callback
     }
 
@@ -60,7 +59,7 @@ class AppCardViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = AppCardState.Loading
 
-//            runCatching {
+            runCatching {
 
                 appRepo.get().collect { appCards ->
                     _state.value = AppCardState.Content(
@@ -69,9 +68,9 @@ class AppCardViewModel @Inject constructor(
                     )
                 }
 
-//            }.onFailure {
-//                _state.value = AppCardState.Error
-//            }
+            }.onFailure {
+                _state.value = AppCardState.Error
+            }
         }
     }
 }

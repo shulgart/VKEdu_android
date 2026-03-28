@@ -3,11 +3,7 @@ package com.example.helloworld.data.appcard
 import com.example.helloworld.data.appcard.dto.AppCardDto
 import com.example.helloworld.data.appcard.dto.AppCardEntity
 import com.example.helloworld.domain.appcard.AppCard
-import com.example.helloworld.domain.appcard.AppCategory
-import com.example.helloworld.domain.appcard.CategoryConverter
-import com.example.helloworld.domain.appdetails.Category
-//import com.example.helloworld.domain.appcard.getAppCategory
-//import com.example.helloworld.domain.appcard.getCategoryName
+import com.example.helloworld.data.appdetails.CategoryConverter
 import javax.inject.Inject
 
 class AppCardMapper @Inject constructor() {

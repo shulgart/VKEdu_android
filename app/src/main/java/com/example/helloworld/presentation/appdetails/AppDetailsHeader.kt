@@ -24,10 +24,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.helloworld.R
+import com.example.helloworld.domain.appcard.AppCategory
 import com.example.helloworld.domain.appdetails.AppDetails
-import com.example.helloworld.domain.appdetails.Category
 import com.example.helloworld.presentation.theme.VkEducationTheme
 import kotlin.math.roundToInt
+import kotlin.text.category
 
 @Composable
 fun AppDetailsHeader(
@@ -86,21 +87,39 @@ fun AppDetailsHeader(
     }
 }
 
-// Статичные строки, которые не приходят из бэкенда
-// нужно хранить в ресурсах (strings.xml).
+// Используем сериализованные имена категорий, которые приходят из API
 @Composable
-private fun getCategoryText(category: Category): String = when (category) {
-    Category.APP -> stringResource(R.string.category_app)
-    Category.GAME -> stringResource(R.string.category_game)
+private fun getCategoryText(category: AppCategory): String = when (category) {
+    AppCategory.APP -> "Приложения"
+    AppCategory.GAME -> "Игры"
+    AppCategory.PRODUCTIVITY -> "Производительность"
+    AppCategory.SOCIAL -> "Социальные сети"
+    AppCategory.EDUCATION -> "Образование"
+    AppCategory.ENTERTAINMENT -> "Развлечения"
+    AppCategory.MUSIC -> "Музыка"
+    AppCategory.VIDEO -> "Видео"
+    AppCategory.PHOTOGRAPHY -> "Фотография"
+    AppCategory.HEALTH -> "Здоровье"
+    AppCategory.SPORTS -> "Спорт"
+    AppCategory.NEWS -> "Новости"
+    AppCategory.BOOKS -> "Книги"
+    AppCategory.BUSINESS -> "Бизнес"
+    AppCategory.FINANCE -> "Финансы"
+    AppCategory.TRAVEL -> "Путешествия"
+    AppCategory.MAPS -> "Карты"
+    AppCategory.FOOD -> "Еда"
+    AppCategory.SHOPPING -> "Покупки"
+    AppCategory.UTILITIES -> "Утилиты"
 }
 
 @Preview
 @Composable
 private fun Preview() {
     val appDetails = AppDetails(
+        id = "fa2e31b8-1234-4cf7-9914-108a170a1b01",
         name = "Гильдия Героев: Экшен ММО РПГ",
         developer = "VK Play",
-        category = Category.GAME,
+        category = AppCategory.GAME,
         ageRating = 12,
         size = 223.7f,
         screenshotUrlList = listOf(
