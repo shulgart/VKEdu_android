@@ -28,60 +28,60 @@ fun AppCardContent(list: List<AppCard>,
     }
 }
 
-@Preview
-@Composable
-private fun Preview()
-{
-    val browserApp = AppCard(
-        "Яндекс.Браузер - с Алисой",
-        "Быстрый и безопасный браузер",
-        AppCategory.TOOLS,
-        R.drawable.yandex_brow
-    )
-
-    val sberApp = AppCard(
-        "СберБанк Онлайн - с Салютом",
-        "Больше чем банк",
-        AppCategory.FINANCES,
-        R.drawable.sber
-    )
-
-    val mailApp = AppCard(
-        "Почта Mail.ru",
-        "Почтовый клиент для любых ящиков",
-        AppCategory.TOOLS,
-        R.drawable.mail_logo
-    )
-
-    val navApp = AppCard(
-        "Яндекс Навигатор",
-        "Парковки и заправки - по пути",
-        AppCategory.TRANSPORT,
-        R.drawable.navigator
-    )
-
-    val mtsApp = AppCard(
-        "Мой МТС",
-        "Мой МТС - центр экосистемы МТС",
-        AppCategory.TOOLS,
-        R.drawable.mts
-    )
-
-    val yandexApp = AppCard(
-        "Яндекс - с Алисой",
-        "Яндекс - поиск всегда под рукой",
-        AppCategory.TOOLS,
-        R.drawable.yandex
-    )
-
-    VkEducationTheme() {
-        AppCardContent(
-            list = listOf(browserApp, sberApp, mailApp, navApp, mtsApp, yandexApp),
-            {},
-            {},
-            modifier=Modifier
-            .background(Color.LightGray)
-            .fillMaxHeight()
-            .safeDrawingPadding())
-    }
-}
+//@Preview
+//@Composable
+//private fun Preview()
+//{
+//    val browserApp = AppCard(
+//        "Яндекс.Браузер - с Алисой",
+//        "Быстрый и безопасный браузер",
+//        AppCategory.TOOLS,
+//        R.drawable.yandex_brow
+//    )
+//
+//    val sberApp = AppCard(
+//        "СберБанк Онлайн - с Салютом",
+//        "Больше чем банк",
+//        AppCategory.FINANCES,
+//        R.drawable.sber
+//    )
+//
+//    val mailApp = AppCard(
+//        "Почта Mail.ru",
+//        "Почтовый клиент для любых ящиков",
+//        AppCategory.TOOLS,
+//        R.drawable.mail_logo
+//    )
+//
+//    val navApp = AppCard(
+//        "Яндекс Навигатор",
+//        "Парковки и заправки - по пути",
+//        AppCategory.TRANSPORT,
+//        R.drawable.navigator
+//    )
+//
+//    val mtsApp = AppCard(
+//        "Мой МТС",
+//        "Мой МТС - центр экосистемы МТС",
+//        AppCategory.TOOLS,
+//        R.drawable.mts
+//    )
+//
+//    val yandexApp = AppCard(
+//        "Яндекс - с Алисой",
+//        "Яндекс - поиск всегда под рукой",
+//        AppCategory.TOOLS,
+//        R.drawable.yandex
+//    )
+//
+//    VkEducationTheme() {
+//        AppCardContent(
+//            list = listOf(browserApp, sberApp, mailApp, navApp, mtsApp, yandexApp),
+//            {},
+//            {},
+//            modifier=Modifier
+//            .background(Color.LightGray)
+//            .fillMaxHeight()
+//            .safeDrawingPadding())
+//    }
+//}

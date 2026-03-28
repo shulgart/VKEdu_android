@@ -7,13 +7,14 @@ import com.example.helloworld.data.appcard.AppCardRepositoryImpl
 import com.example.helloworld.domain.appcard.AppCategory
 import com.example.helloworld.domain.appcard.AppCard
 import com.example.helloworld.domain.appcard.AppCardRepository
-import com.example.helloworld.domain.appcard.RepositoryModule
+import com.example.helloworld.domain.appcard.AppCardModule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -59,17 +60,18 @@ class AppCardViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = AppCardState.Loading
 
-            runCatching {
+//            runCatching {
 
-                val appCards = appRepo.get()
+                appRepo.get().collect { appCards ->
+                    _state.value = AppCardState.Content(
+                        appCards = appCards,
+                        logoClicked = false
+                    )
+                }
 
-                _state.value = AppCardState.Content(
-                    appCards = appCards,
-                    logoClicked = false,
-                )
-            }.onFailure {
-                _state.value = AppCardState.Error
-            }
+//            }.onFailure {
+//                _state.value = AppCardState.Error
+//            }
         }
     }
 }

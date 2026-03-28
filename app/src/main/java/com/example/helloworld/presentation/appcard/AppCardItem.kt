@@ -1,7 +1,6 @@
 package com.example.helloworld.presentation.appcard
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,16 +16,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import coil3.compose.AsyncImage
 import com.example.helloworld.R
 import com.example.helloworld.domain.appcard.AppCategory
 import com.example.helloworld.domain.appcard.AppCard
-import com.example.helloworld.domain.appcard.getAppCategory
 import com.example.helloworld.presentation.theme.VkEducationTheme
 
 @Composable
@@ -51,11 +52,13 @@ fun AppRow(app: AppCard, onGoForward: () -> Unit = {}) {
             horizontalArrangement = Arrangement.Start,
             modifier = Modifier.fillMaxWidth()
         ){
-            Image(
-                painterResource(app.icon),
+            AsyncImage(
+                model = app.iconUrl,
                 null,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(60.dp)
+                    .clip(RoundedCornerShape(16.dp)),
             )
             Spacer(Modifier.width(10.dp))
             Column (
@@ -73,7 +76,7 @@ fun AppRow(app: AppCard, onGoForward: () -> Unit = {}) {
                     fontSize = 10.sp
                 )
                 Text(
-                    getAppCategory(app.category),
+                    app.category.value,
                     color = MaterialTheme.colorScheme.secondary,
                     fontSize = 10.sp
                 )
@@ -82,16 +85,16 @@ fun AppRow(app: AppCard, onGoForward: () -> Unit = {}) {
     }
 }
 
-@Preview
-@Composable
-private fun Preview(){
-    val app = AppCard(
-        "Яндекс.Браузер - с Алисой",
-        "Быстрый и безопасный браузер",
-        AppCategory.TOOLS,
-        R.drawable.yandex_brow
-    )
-    VkEducationTheme() {
-        AppRow(app)
-    }
-}
+//@Preview
+//@Composable
+//private fun Preview(){
+//    val app = AppCard(
+//        "Яндекс.Браузер - с Алисой",
+//        "Быстрый и безопасный браузер",
+//        AppCategory.TOOLS,
+//        R.drawable.yandex_brow
+//    )
+//    VkEducationTheme() {
+//        AppRow(app)
+//    }
+//}

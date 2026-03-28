@@ -22,4 +22,6 @@
 
     <string name="app_details_error">Произошла непредвиденная ошибка</string>
     <string name="app_details_error_refresh">Перезагрузить</string>
+
+    <string name="database_url">http://185.103.109.134</string>
 </resources>

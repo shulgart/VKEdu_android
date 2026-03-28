@@ -5,8 +5,13 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.flow.Flow
 
-interface AppCardRepository {
-    suspend fun get(): Flow<List<AppCard>>
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class AppCardModule {
+
+    @Binds
+    abstract fun bindAppCardRepository(
+        appsRepositoryImpl: AppCardRepositoryImpl
+    ): AppCardRepository
 }

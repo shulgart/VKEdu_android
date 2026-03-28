@@ -3,6 +3,13 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.parcelize)
+//    alias(libs.plugins.kotlin.kapt)
+}
+
+configurations.all {
+    exclude(group = "com.intellij", module = "annotations")
 }
 
 android {
@@ -53,6 +60,7 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     implementation(libs.room.compiler)
+    ksp(libs.room.compiler)
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
