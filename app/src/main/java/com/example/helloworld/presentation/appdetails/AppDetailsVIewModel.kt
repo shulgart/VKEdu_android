@@ -29,7 +29,9 @@ class AppDetailsViewModel @Inject constructor(
     val events = _events.receiveAsFlow()
 
     init {
-        getAppDetails()
+        viewModelScope.launch {
+            getAppDetails()
+        }
     }
 
     fun showUnderDevelopmentMessage() {
@@ -48,19 +50,17 @@ class AppDetailsViewModel @Inject constructor(
         }
     }
 
-    fun getAppDetails() {
-        viewModelScope.launch {
-            _state.value = AppDetailsState.Loading
+    suspend fun getAppDetails() {
+        _state.value = AppDetailsState.Loading
 
-            getAppDetailsUseCase(id).catch { e ->
-                _state.value = AppDetailsState.Error
-                Log.d("HOHOHO", "ERROR $e")
-            }.collect { appDetails ->
-                _state.value = AppDetailsState.Content(
-                    appDetails = appDetails,
-                    descriptionCollapsed = false
-                )
-            }
+        getAppDetailsUseCase(id).catch { e ->
+            _state.value = AppDetailsState.Error
+            Log.d("HOHOHO", "ERROR $e")
+        }.collect { appDetails ->
+            _state.value = AppDetailsState.Content(
+                appDetails = appDetails,
+                descriptionCollapsed = false
+            )
         }
     }
 }
