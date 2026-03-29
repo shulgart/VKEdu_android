@@ -2,24 +2,16 @@ package com.example.helloworld.presentation.appcard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.helloworld.R
-import com.example.helloworld.data.appcard.AppCardRepositoryImpl
-import com.example.helloworld.domain.appcard.AppCategory
-import com.example.helloworld.domain.appcard.AppCard
 import com.example.helloworld.domain.appcard.AppCardRepository
-import com.example.helloworld.domain.appcard.AppCardModule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.seconds
 
 @HiltViewModel
 class AppCardViewModel @Inject constructor(
@@ -32,7 +24,9 @@ class AppCardViewModel @Inject constructor(
     val events = _events.receiveAsFlow()
 
     init {
-        getAppCard()
+        viewModelScope.launch {
+            getAppCard()
+        }
     }
 
     fun clickLogo() {
@@ -55,22 +49,20 @@ class AppCardViewModel @Inject constructor(
         navigate("screen_b") // Trigger navigation via the passed callback
     }
 
-    fun getAppCard() {
-        viewModelScope.launch {
-            _state.value = AppCardState.Loading
+    suspend fun getAppCard() {
+        _state.value = AppCardState.Loading
 
-            runCatching {
+        runCatching {
 
-                appRepo.get().collect { appCards ->
-                    _state.value = AppCardState.Content(
-                        appCards = appCards,
-                        logoClicked = false
-                    )
-                }
-
-            }.onFailure {
-                _state.value = AppCardState.Error
+            appRepo.get().collect { appCards ->
+                _state.value = AppCardState.Content(
+                    appCards = appCards,
+                    logoClicked = false
+                )
             }
+
+        }.onFailure {
+            _state.value = AppCardState.Error
         }
     }
 }
