@@ -2,6 +2,7 @@ package com.example.helloworld.data.appcard
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
 import com.example.helloworld.R
 import com.example.helloworld.domain.appcard.AppCardRepository
 import com.example.helloworld.domain.appcard.AppCard
@@ -45,7 +46,9 @@ class AppCardRepositoryImpl @Inject constructor(
         context = context,
         AppCardDatabase::class.java,
         "app-db"
-    ).build()
+    )
+//        .fallbackToDestructiveMigration(true)
+        .build()
 
     override suspend fun get(): Flow<List<AppCard>> {
         return db.appsDao().getApps().map { it ->

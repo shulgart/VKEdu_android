@@ -25,15 +25,19 @@ fun AppDetailsContent(
     onInstallClick: () -> Unit,
     onReadMoreClick: () -> Unit,
     onDeveloperClick: () -> Unit,
+    onWishlistClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val appDetails = content.appDetails
     val descriptionCollapsed = content.descriptionCollapsed
+    val isInWishlist = content.isInWishlist
 
     Column(modifier) {
         Toolbar(
+            isInWishlist = isInWishlist,
             onBackClick = onBackClick,
             onShareClick = onShareClick,
+            onWishlistClick = onWishlistClick,
         )
         Spacer(Modifier.height(8.dp))
         AppDetailsHeader(
@@ -100,12 +104,14 @@ private fun Preview() {
                     description = "Легендарный рейд героев в Фэнтези РПГ. Станьте героем гильдии и зразите мастера подземелья!"
                 ),
                 descriptionCollapsed = false,
+                isInWishlist = false
             ),
             onReadMoreClick = {},
             onBackClick = {},
             onShareClick = {},
             onInstallClick = {},
             onDeveloperClick = {},
+            onWishlistClick = {},
             modifier = Modifier.fillMaxSize(),
         )
     }

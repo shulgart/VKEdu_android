@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.helloworld.domain.appdetails.AppDetailsRepository
 import com.example.helloworld.domain.appdetails.GetAppDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -19,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AppDetailsViewModel @Inject constructor(
     private val getAppDetailsUseCase: GetAppDetailsUseCase,
+    private val appDetailsRepository: AppDetailsRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val id: String = checkNotNull(savedStateHandle["id"])
@@ -29,9 +31,8 @@ class AppDetailsViewModel @Inject constructor(
     val events = _events.receiveAsFlow()
 
     init {
-        viewModelScope.launch {
-            getAppDetails()
-        }
+        getAppDetails()
+//        observeAppDetails()
     }
 
     fun showUnderDevelopmentMessage() {
@@ -50,17 +51,41 @@ class AppDetailsViewModel @Inject constructor(
         }
     }
 
-    suspend fun getAppDetails() {
-        _state.value = AppDetailsState.Loading
+    fun getAppDetails() {
+        viewModelScope.launch {
+            _state.value = AppDetailsState.Loading
 
-        getAppDetailsUseCase(id).catch { e ->
-            _state.value = AppDetailsState.Error
-            Log.d("HOHOHO", "ERROR $e")
-        }.collect { appDetails ->
-            _state.value = AppDetailsState.Content(
-                appDetails = appDetails,
-                descriptionCollapsed = false
-            )
+            getAppDetailsUseCase(id).catch { e ->
+                _state.value = AppDetailsState.Error
+                Log.d("HOHOHO", "ERROR $e")
+            }
+                .collect { appDetails ->
+                    _state.value = AppDetailsState.Content(
+                        appDetails = appDetails,
+                        descriptionCollapsed = false,
+                        isInWishlist = appDetails.isInWishlist
+                    )
+                }
+        }
+    }
+
+    fun observeAppDetails() {
+        viewModelScope.launch {
+            appDetailsRepository.observeAppDetails(id)
+//                .catch { _state.value = AppDetailsState.Error }
+                .collect { appDetails ->
+                    _state.value = AppDetailsState.Content(
+                        appDetails = appDetails,
+                        descriptionCollapsed = false,
+                        isInWishlist = appDetails.isInWishlist
+                    )
+                }
+        }
+    }
+
+    fun toggleWishlist() {
+        viewModelScope.launch {
+            appDetailsRepository.toggleWishlist(id)
         }
     }
 }

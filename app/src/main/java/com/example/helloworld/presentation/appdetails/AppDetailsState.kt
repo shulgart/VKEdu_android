@@ -10,5 +10,6 @@ sealed interface AppDetailsState {
     data class Content(
         val appDetails: AppDetails,
         val descriptionCollapsed: Boolean,
+        val isInWishlist: Boolean
     ) : AppDetailsState
 }

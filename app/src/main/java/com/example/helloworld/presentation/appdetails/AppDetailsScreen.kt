@@ -56,7 +56,7 @@ fun AppDetailsScreen(
             is AppDetailsState.Error -> {
                 AppDetailsError(
                     onRefreshClick = { viewModel.viewModelScope.launch {
-                        viewModel.getAppDetails()
+                        viewModel.observeAppDetails()
                     } },
                     modifier = Modifier
                         .fillMaxSize()
@@ -80,6 +80,9 @@ fun AppDetailsScreen(
                     },
                     onDeveloperClick = {
                         viewModel.showUnderDevelopmentMessage()
+                    },
+                    onWishlistClick = {
+                        viewModel.toggleWishlist()
                     },
                     modifier = Modifier
                         .fillMaxSize()

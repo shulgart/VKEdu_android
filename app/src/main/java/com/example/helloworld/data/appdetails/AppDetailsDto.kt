@@ -16,4 +16,5 @@ data class AppDetailsDto(
     val icon: String,
     val screenshots: List<String>? = null,
     val description: String,
+    val isInWishlist: Boolean = false
 )
