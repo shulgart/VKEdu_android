@@ -1,16 +1,16 @@
 package com.example.helloworld.presentation.appdetails
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.helloworld.domain.appdetails.GetAppDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -49,18 +49,18 @@ class AppDetailsViewModel @Inject constructor(
     }
 
     fun getAppDetails() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _state.value = AppDetailsState.Loading
-
-            getAppDetailsUseCase(id).catch { e ->
-                _state.value = AppDetailsState.Error
-                Log.d("HOHOHO", "ERROR $e")
-            }.collect { appDetails ->
+            runCatching {
+                val appDetails = async{getAppDetailsUseCase(id)}
                 _state.value = AppDetailsState.Content(
-                    appDetails = appDetails,
+                    appDetails.await(),
                     descriptionCollapsed = false
                 )
+            }.onFailure {
+                _state.value = AppDetailsState.Error
             }
+
         }
     }
 }

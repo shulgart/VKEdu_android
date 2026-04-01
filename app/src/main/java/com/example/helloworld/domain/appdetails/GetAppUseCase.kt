@@ -1,10 +1,8 @@
 package com.example.helloworld.domain.appdetails
 
-import kotlinx.coroutines.flow.Flow
-
 class GetAppDetailsUseCase(
     private val appDetailsRepository: AppDetailsRepository,
 ) {
-    operator fun invoke(id: String): Flow<AppDetails> =
+    operator suspend fun invoke(id: String): AppDetails =
         appDetailsRepository.getAppDetails(id)
 }
