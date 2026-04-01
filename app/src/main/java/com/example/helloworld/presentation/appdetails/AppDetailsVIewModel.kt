@@ -32,7 +32,6 @@ class AppDetailsViewModel @Inject constructor(
 
     init {
         getAppDetails()
-//        observeAppDetails()
     }
 
     fun showUnderDevelopmentMessage() {
@@ -59,20 +58,6 @@ class AppDetailsViewModel @Inject constructor(
                 _state.value = AppDetailsState.Error
                 Log.d("HOHOHO", "ERROR $e")
             }
-                .collect { appDetails ->
-                    _state.value = AppDetailsState.Content(
-                        appDetails = appDetails,
-                        descriptionCollapsed = false,
-                        isInWishlist = appDetails.isInWishlist
-                    )
-                }
-        }
-    }
-
-    fun observeAppDetails() {
-        viewModelScope.launch {
-            appDetailsRepository.observeAppDetails(id)
-//                .catch { _state.value = AppDetailsState.Error }
                 .collect { appDetails ->
                     _state.value = AppDetailsState.Content(
                         appDetails = appDetails,

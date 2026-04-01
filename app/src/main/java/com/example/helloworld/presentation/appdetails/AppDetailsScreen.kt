@@ -16,7 +16,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.helloworld.R
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -26,7 +25,6 @@ fun AppDetailsScreen(
     viewModel: AppDetailsViewModel,
     onBack: () -> Unit,
 ) {
-//    val viewModel = viewModel<AppDetailsViewModel>()
     val state by viewModel.state.collectAsState()
     val events = viewModel.events
 
@@ -56,7 +54,7 @@ fun AppDetailsScreen(
             is AppDetailsState.Error -> {
                 AppDetailsError(
                     onRefreshClick = { viewModel.viewModelScope.launch {
-                        viewModel.observeAppDetails()
+                        viewModel.getAppDetails()
                     } },
                     modifier = Modifier
                         .fillMaxSize()

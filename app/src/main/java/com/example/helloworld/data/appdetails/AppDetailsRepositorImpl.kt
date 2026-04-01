@@ -16,7 +16,7 @@ class AppDetailsRepositoryImpl @Inject constructor(
     private val entityMapper: AppDetailsEntityMapper,
 ) : AppDetailsRepository {
 
-    override suspend fun getAppDetails(id: String): Flow<AppDetails> {
+    override fun getAppDetails(id: String): Flow<AppDetails> {
         return dao.getAppDetails(id).map { entity ->
             if (entity != null) {
                 entityMapper.toDomain(entity)
@@ -30,11 +30,6 @@ class AppDetailsRepositoryImpl @Inject constructor(
                 domain
             }
         }
-    }
-
-    override fun observeAppDetails(id: String): Flow<AppDetails> {
-        return dao.getAppDetails(id)
-            .map { it -> entityMapper.toDomain(it!!) }
     }
 
     override suspend fun toggleWishlist(id: String) {
