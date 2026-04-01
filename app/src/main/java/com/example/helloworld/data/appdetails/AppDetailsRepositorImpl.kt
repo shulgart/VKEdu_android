@@ -15,7 +15,7 @@ class AppDetailsRepositoryImpl @Inject constructor(
     private val entityMapper: AppDetailsEntityMapper,
 ) : AppDetailsRepository {
 
-    override suspend fun getAppDetails(id: String): Flow<AppDetails> {
+    override fun getAppDetails(id: String): Flow<AppDetails> {
         return dao.getAppDetails(id).map { entity ->
             if (entity != null) {
                 entityMapper.toDomain(entity)
