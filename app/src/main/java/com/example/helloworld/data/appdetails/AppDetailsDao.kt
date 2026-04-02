@@ -12,7 +12,4 @@ interface AppDetailsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAppDetails(appDetails: AppDetailsEntity)
-
-//    @Query("DELETE FROM app_details WHERE id = :id")
-//    suspend fun deleteAppDetails(id: String)
 }

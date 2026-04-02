@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.helloworld.domain.appdetails.GetAppDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -52,9 +51,9 @@ class AppDetailsViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             _state.value = AppDetailsState.Loading
             runCatching {
-                val appDetails = async{getAppDetailsUseCase(id)}
+                val appDetails = getAppDetailsUseCase(id)
                 _state.value = AppDetailsState.Content(
-                    appDetails.await(),
+                    appDetails,
                     descriptionCollapsed = false
                 )
             }.onFailure {
