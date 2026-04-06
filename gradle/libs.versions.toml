@@ -22,6 +22,7 @@ kotlinx = "2.2.20"
 logging-interceptor = "4.12.0"
 kotlin-kapt = "2.2.20"
 room = "2.8.2"
+mockk = "1.13.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -52,6 +53,7 @@ logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-intercep
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room"}
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room"}
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"}
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
