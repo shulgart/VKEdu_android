@@ -1,6 +1,7 @@
-package com.example.helloworld.domain.appcard
+package com.example.helloworld.di
 
 import com.example.helloworld.data.appcard.AppCardRepositoryImpl
+import com.example.helloworld.domain.appcard.AppCardRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
