@@ -7,16 +7,12 @@ import com.example.helloworld.data.appcard.AppCardDao
 import com.example.helloworld.data.appcard.AppCardDatabase
 import com.example.helloworld.data.appcard.AppCardMapper
 import com.example.helloworld.data.appcard.AppCardRepositoryImpl
-import com.example.helloworld.data.appdetails.AppDetailsRepositoryImpl
 import com.example.helloworld.domain.appcard.AppCardRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
-import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import javax.inject.Singleton
 
 @Module
