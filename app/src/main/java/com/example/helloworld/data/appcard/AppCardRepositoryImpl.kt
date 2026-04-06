@@ -21,41 +21,17 @@ import javax.inject.Inject
 import kotlin.jvm.java
 
 class AppCardRepositoryImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
+    private val api: AppCardApi,
+    private val dao: AppCardDao,
     private val mapper : AppCardMapper
 ) : AppCardRepository {
-    private val logging = HttpLoggingInterceptor().apply{
-        level = HttpLoggingInterceptor.Level.BODY
-    }
-
-    private val client = OkHttpClient.Builder()
-        .addInterceptor(logging)
-        .build()
-
-    private val contentType = "application/json".toMediaType()
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(context.getString(R.string.database_url))
-        .client(client)
-        .addConverterFactory(Json.asConverterFactory(contentType))
-        .build()
-
-    private val service = retrofit.create(AppCardApi::class.java)
-
-    val db = Room.databaseBuilder(
-        context = context,
-        AppCardDatabase::class.java,
-        "app-db"
-    )
-//        .fallbackToDestructiveMigration(true)
-        .build()
 
     override suspend fun get(): Flow<List<AppCard>> {
-        return db.appsDao().getApps().map { it ->
+        return dao.getApps().map { it ->
             if(it.isNotEmpty()) {
                 it.map { mapper.toAppCard(it) }
             } else {
-                val dto = service.get()
+                val dto = api.get()
                 val domain = dto.map{
                     mapper.toDomain(it)
                 }
@@ -63,7 +39,7 @@ class AppCardRepositoryImpl @Inject constructor(
                     mapper.toAppCardEntity(it)
                 }
                 withContext(Dispatchers.IO) {
-                    db.appsDao().insertApps(entity)
+                    dao.insertApps(entity)
                 }
                 domain
             }
